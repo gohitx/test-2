@@ -9,7 +9,7 @@ export default function Index() {
         alignItems: 'center',
       }}
     >
-      <Text>New test APP</Text>
+      <Text className="text-2xl font-bold text-blue-400">New test APP 322</Text>
     </View>
   );
 }
