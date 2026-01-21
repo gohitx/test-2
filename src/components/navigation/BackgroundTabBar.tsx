@@ -1,5 +1,5 @@
-import { Colors } from '@/constants/themes';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { BlurView } from 'expo-blur';
 import React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Animated, {
@@ -8,8 +8,10 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { TAB_BAR_CONFIG, TAB_CONFIG } from './navigation';
 import { ButtonsTabBar } from './ButtonsTabBar';
+import { TAB_BAR_CONFIG, TAB_CONFIG } from './navigation';
+
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 export function BackgroundTabBar({
   state,
@@ -27,7 +29,9 @@ export function BackgroundTabBar({
   const bottomPadding = Math.max(insets.bottom, TAB_BAR_CONFIG.paddingBottom);
 
   return (
-    <Animated.View
+    <AnimatedBlurView
+      intensity={80}
+      tint="light"
       style={[
         styles.container,
         animatedStyle,
@@ -79,7 +83,7 @@ export function BackgroundTabBar({
           );
         })}
       </View>
-    </Animated.View>
+    </AnimatedBlurView>
   );
 }
 
@@ -89,20 +93,21 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: Colors.tabBar.background,
+    backgroundColor: 'rgba(255, 255, 255, 0.85)', // Semi-transparent for glass effect
     borderTopWidth: 1,
-    borderTopColor: Colors.tabBar.border,
+    borderTopColor: 'rgba(255, 255, 255, 0.3)', // Subtle border
     ...Platform.select({
       ios: {
         shadowColor: '#000',
         shadowOffset: { width: 0, height: -2 },
-        shadowOpacity: 0.05,
-        shadowRadius: 8,
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
       },
       android: {
         elevation: 8,
       },
     }),
+    overflow: 'hidden', // Required for BlurView on some platforms
   },
   tabsContainer: {
     flexDirection: 'row',

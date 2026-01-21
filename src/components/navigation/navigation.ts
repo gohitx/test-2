@@ -1,11 +1,5 @@
 import type { LucideIcon } from 'lucide-react-native';
-import {
-  Home,
-  MessageCircle,
-  Plus,
-  User,
-  Wallet
-} from 'lucide-react-native';
+import { Home, MessageCircle, Plus, User, Wallet } from 'lucide-react-native';
 
 export interface TabConfig {
   name: string;
@@ -15,7 +9,7 @@ export interface TabConfig {
 }
 
 /**
- * Tab configuration for the bottom navigation bar
+ * Tab configuration for the bottom navigation bars
  * Order matters - tabs will be displayed in this order
  */
 export const TAB_CONFIG: TabConfig[] = [

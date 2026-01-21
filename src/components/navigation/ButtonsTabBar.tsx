@@ -2,7 +2,7 @@ import { Colors } from '@/constants/themes';
 import * as Haptics from 'expo-haptics';
 import type { LucideIcon } from 'lucide-react-native';
 import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedStyle,
@@ -74,11 +74,7 @@ export function ButtonsTabBar({
         accessibilityState={{ selected: isFocused }}
       >
         <View style={styles.fabButton}>
-          <Icon
-            size={TAB_BAR_CONFIG.fabIconSize}
-            color={Colors.tabBar.fabIcon}
-            strokeWidth={2.5}
-          />
+          <Icon size={TAB_BAR_CONFIG.fabIconSize} color={Colors.tabBar.fabIcon} strokeWidth={2.5} />
         </View>
       </AnimatedPressable>
     );
@@ -99,13 +95,22 @@ export function ButtonsTabBar({
       <Animated.View style={[styles.iconContainer, animatedIconStyle]}>
         <Icon
           size={TAB_BAR_CONFIG.iconSize}
-          color={
-            isFocused ? Colors.tabBar.activeIcon : Colors.tabBar.inactiveIcon
-          }
+          color={isFocused ? Colors.tabBar.activeIcon : Colors.tabBar.inactiveIcon}
           strokeWidth={isFocused ? 2.5 : 2}
         />
         {isFocused && <View style={styles.activeIndicator} />}
       </Animated.View>
+      <Text
+        style={[
+          styles.label,
+          isFocused ? styles.labelActive : null,
+          {
+            color: isFocused ? Colors.tabBar.activeIcon : Colors.tabBar.inactiveIcon,
+          },
+        ]}
+      >
+        {label}
+      </Text>
     </AnimatedPressable>
   );
 }
